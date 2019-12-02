@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[17]:
+# In[14]:
 
 
 #Libreria para aplicar funciones reges
@@ -19,7 +19,7 @@ import pandas as pd
 import numpy as np
 
 
-# In[18]:
+# In[15]:
 
 
 #Metodo que con funciones regex obtiene los datos de las tablas pvoutput
@@ -55,14 +55,14 @@ def extraeInfoWeb (webscrap):
     regex = "<td nowrap=\"\">(\w*\s\w*|\w*|-)</td><td align=\"right\""
     matches = re.findall(regex, webscrap, re.MULTILINE)
     auxInput.append(matches)
-
-
+    
     datosBruto = np.array(auxInput).T.tolist()
-    enpandas = pd.DataFrame(datosBruto)
+    head = ['date', "generated", "efficiency", "peakpower","peaktime","conditions"]
+    enpandas = pd.DataFrame(datosBruto, columns=head)
     return enpandas
 
 
-# In[19]:
+# In[16]:
 
 
 #Construimos las URLS a las que vamos a pedir información
@@ -124,7 +124,7 @@ def crearUrls(anyoInicio,anyoFin,ide,sid):
     return urls
 
 
-# In[20]:
+# In[17]:
 
 
 def getData(anyoInicio,anyoFin,ide,sid):#listaUrls):
@@ -169,7 +169,7 @@ def getData(anyoInicio,anyoFin,ide,sid):#listaUrls):
     return df
 
 
-# In[7]:
+# In[18]:
 
 
 # #Parameters para la instalación del mercado del carmel en Barcelona
@@ -191,7 +191,7 @@ def getData(anyoInicio,anyoFin,ide,sid):#listaUrls):
 # # df.to_csv(path, sep =';', index=False)
 
 
-# In[21]:
+# In[19]:
 
 
 #Cargamos los datos de las instalaciones de las que queremos extraer datos
@@ -221,7 +221,7 @@ for i in range (0,len(instalaciones)):
     df["sid"] = sid
     df["potenciaInstalada"] = instalaciones.iloc[i]['Potencia Instalada']
     df["eficiencia"] = instalaciones.iloc[i]['Eficiencia Placa (%)']
-    df["modeloPlaca"] = instalaciones.iloc["modeloPlaca"]
+    df["modeloPlaca"] = instalaciones.iloc[i]["modeloPlaca"]
     #Export data of a instalation to csv
     df.to_csv(path, sep =';', index=False)
     dfFinal.append(df)
