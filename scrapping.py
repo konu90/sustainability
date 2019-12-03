@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
+# %%
 
 # coding: utf-8
 
-# In[14]:
+# %%
 
 
 #Libreria para aplicar funciones reges
@@ -19,7 +21,7 @@ import pandas as pd
 import numpy as np
 
 
-# In[15]:
+# %%
 
 
 #Metodo que con funciones regex obtiene los datos de las tablas pvoutput
@@ -37,7 +39,7 @@ def extraeInfoWeb (webscrap):
     auxInput.append(matches)
 
     # Obtén eficiencia (efficiency)
-    regex = "style=\"padding-right:25px\">(.d*\.\d*|-)"
+    regex = "style=\"padding-right:25px\">(\d*\.\d*|-)"
     matches = re.findall(regex, webscrap, re.MULTILINE)
     auxInput.append(matches)
 
@@ -62,7 +64,7 @@ def extraeInfoWeb (webscrap):
     return enpandas
 
 
-# In[16]:
+# %%
 
 
 #Construimos las URLS a las que vamos a pedir información
@@ -124,7 +126,7 @@ def crearUrls(anyoInicio,anyoFin,ide,sid):
     return urls
 
 
-# In[17]:
+# %%
 
 
 def getData(anyoInicio,anyoFin,ide,sid):#listaUrls):
@@ -169,7 +171,7 @@ def getData(anyoInicio,anyoFin,ide,sid):#listaUrls):
     return df
 
 
-# In[18]:
+# %%
 
 
 # #Parameters para la instalación del mercado del carmel en Barcelona
@@ -191,7 +193,7 @@ def getData(anyoInicio,anyoFin,ide,sid):#listaUrls):
 # # df.to_csv(path, sep =';', index=False)
 
 
-# In[19]:
+# %%
 
 
 #Cargamos los datos de las instalaciones de las que queremos extraer datos
@@ -230,7 +232,7 @@ pathAll = os.getcwd() + "\\data\\" + "pvoutput.csv"
 dfFinal.to_csv(pathAll, sep =';', index=False) 
 
 
-# In[29]:
+# %%
 
 
 urls = crearUrls(anyoInicio,anyoFin,ide,sid)
@@ -254,14 +256,14 @@ for x in range(2,len(paragraphs)):
 dataToParsed
 
 
-# In[30]:
+# %%
 
 
 test = extraeInfoWeb(str(dataToParsed))
 test
 
 
-# In[31]:
+# %%
 
 
 urls = crearUrls(anyoInicio,anyoFin,ide,sid)
@@ -285,7 +287,7 @@ for x in range(2,len(paragraphs)):
 dataToParsed
 
 
-# In[32]:
+# %%
 
 
 test = extraeInfoWeb(str(dataToParsed))
