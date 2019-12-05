@@ -34,12 +34,12 @@ def extraeInfoWeb (webscrap):
     auxInput.append(matches)
 
     # Obtén energía generada (Generated)
-    regex = "title=\"Exported: None\">(\d*\.\d*|-)"
+    regex = "(?:title=\"Exported: None\">|title=\"Exported: \d*\.\d*kWh\">)(\d*\.\d*)"
     matches = re.findall(regex, webscrap, re.MULTILINE)
     auxInput.append(matches)
 
     # Obtén eficiencia (efficiency)
-    regex = "style=\"padding-right:25px\">(\d*\.\d*|-)"
+    regex = "style=\"padding-right:25px\">(\d*\.\d*|-^\d)"
     matches = re.findall(regex, webscrap, re.MULTILINE)
     auxInput.append(matches)
 
